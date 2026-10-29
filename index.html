@@ -149,6 +149,15 @@ h2.big { font-family: var(--display); font-size: clamp(42px, 6.6vw, 100px); line
 .clients { margin-top: clamp(56px, 8vw, 96px); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
 .clients > div { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); min-height: 120px; padding: 12px; display: grid; grid-template-rows: auto 1fr; transition: background .25s; }
 .clients > div:hover { background: var(--ink-2); }
+/* portada del proyecto detrás de cada marca, baja opacidad */
+.clients > div, .clients > .you { position: relative; overflow: hidden; isolation: isolate; }
+.clients .cbg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; opacity: .26; filter: grayscale(.35) contrast(1.05); transform: scale(1.04); transition: opacity .5s, transform 1.2s cubic-bezier(.2,.7,.2,1), filter .5s; }
+.clients > div:has(.cbg)::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(10,10,10,.55), rgba(10,10,10,.25) 45%, rgba(10,10,10,.7)); }
+.clients > div:hover .cbg { opacity: .55; filter: grayscale(0); transform: scale(1.1); }
+.clients .name { text-shadow: 0 2px 14px rgba(0,0,0,.6); }
+.clients > .you { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); min-height: 120px; padding: 12px; display: grid; grid-template-rows: auto 1fr; border: 1px dashed #3a3a3a; transition: background .3s, border-color .3s; }
+.clients > .you:hover { background: rgba(227,38,28,.12); border-color: var(--rec); }
+.clients > .you .name small { display: block; margin-top: 6px; font-family: var(--mono); font-size: 11px; letter-spacing: .1em; color: var(--rec); }
 .clients .name { align-self: center; justify-self: center; text-align: center; font-family: var(--cond); font-size: clamp(20px, 2vw, 28px); line-height: 1.05; text-transform: uppercase; }
 .clients .intro { grid-column: span 2; background: var(--rec); color: #fff; display: grid; align-content: space-between; gap: 18px; }
 .clients .intro strong { font-family: var(--display); font-size: 30px; font-weight: 400; line-height: 1; text-transform: uppercase; }
@@ -224,7 +233,7 @@ h2.big { font-family: var(--display); font-size: clamp(42px, 6.6vw, 100px); line
 @media (max-width: 820px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } .stat:nth-child(2) { border-right: none; } }
 
 /* testimonios */
-.quotes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.quotes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
 .quote { background: var(--ink-2); border: 1px solid var(--line); border-radius: 4px; padding: 26px; display: grid; gap: 22px; align-content: space-between; }
 .quote p { font-size: 18px; line-height: 1.4; }
 .quote footer { display: grid; gap: 2px; font-size: 14px; }
@@ -445,25 +454,25 @@ details p { color: var(--muted); padding-bottom: 18px; max-width: 60ch; }
       </div>
 
       <div class="clients">
-        <div class="intro"><span class="tag" style="color:#fff">Marcas y clientes</span><strong>+<span data-count="18">18</span> marcas</strong><p>Cada nombre es un proyecto grabado, editado o fotografiado por mí, en Venezuela y en Estados Unidos.</p></div>
-        <div><span class="tag">Festival · USA</span><span class="name">Utopia Movement</span></div>
-        <div><span class="tag">Centro comercial</span><span class="name">Unicentro Maracay</span></div>
-        <div><span class="tag">Tecnología</span><span class="name">Intelligent Sound</span></div>
-        <div><span class="tag">Bodas · USA</span><span class="name">Evolution Eventos</span></div>
-        <div><span class="tag">Bebidas</span><span class="name">Bebidas Crystal</span></div>
-        <div><span class="tag">Gastronomía</span><span class="name">La Felicittà</span></div>
-        <div><span class="tag">Eventos · USA</span><span class="name">Viva 915 Media</span></div>
-        <div><span class="tag">Moda</span><span class="name">Mr. Brands</span></div>
-        <div><span class="tag">Gastronomía</span><span class="name">La Casita Maracay</span></div>
-        <div><span class="tag">Moda</span><span class="name">Bari Venezuela</span></div>
-        <div><span class="tag">Eventos</span><span class="name">Juventud de Reforma</span></div>
-        <div><span class="tag">Productora</span><span class="name">Vibra Visual</span></div>
-        <div><span class="tag">Floristería</span><span class="name">Blum Studio Floral</span></div>
-        <div><span class="tag">Barbería</span><span class="name">Alex Michael</span></div>
-        <div><span class="tag">Lifestyle</span><span class="name">Evan Cabral</span></div>
-        <div><span class="tag">Deporte</span><span class="name">Ángel Sosa · Hyrox</span></div>
-        <div><span class="tag">Barbería</span><span class="name">Efrata Barber</span></div>
-        <div><span class="tag">Fotografía</span><span class="name">Alex Alvarado</span></div>
+        <div class="intro"><span class="tag" style="color:#fff">Marcas y clientes</span><strong>+<span data-count="17">17</span> marcas</strong><p>Cada nombre es un proyecto grabado o editado por mí, en Venezuela y en Estados Unidos.</p></div>
+        <div><img class="cbg" src="media/ig/DWJzsOQkauw.jpg" alt="" loading="lazy"><span class="tag">Festival · USA</span><span class="name">Utopia Movement</span></div>
+        <div><img class="cbg" src="media/ig/DSlgRnWj0sS.jpg" alt="" loading="lazy"><span class="tag">Centro comercial</span><span class="name">Unicentro Maracay</span></div>
+        <div><img class="cbg" src="media/ig/DRsftwhiBby.jpg" alt="" loading="lazy"><span class="tag">Tecnología</span><span class="name">Intelligent Sound</span></div>
+        <div><img class="cbg" src="media/ig/DSfnGsBjbPA.jpg" alt="" loading="lazy"><span class="tag">Bodas · USA</span><span class="name">Evolution Eventos</span></div>
+        <div><img class="cbg" src="media/ig/DZdquHzhHpu.jpg" alt="" loading="lazy"><span class="tag">Bebidas</span><span class="name">Bebidas Crystal</span></div>
+        <div><img class="cbg" src="media/ig/C3YR5EiPv2N.jpg" alt="" loading="lazy"><span class="tag">Gastronomía</span><span class="name">La Felicittà</span></div>
+        <div><img class="cbg" src="media/ig/DL2mf4mRDIk.jpg" alt="" loading="lazy"><span class="tag">Eventos · USA</span><span class="name">Viva 915 Media</span></div>
+        <div><img class="cbg" src="media/ig/C8poMOkv7gP.jpg" alt="" loading="lazy"><span class="tag">Moda</span><span class="name">Mr. Brands</span></div>
+        <div><img class="cbg" src="media/ig/C6WQrEfLkJB.jpg" alt="" loading="lazy"><span class="tag">Gastronomía</span><span class="name">La Casita Maracay</span></div>
+        <div><img class="cbg" src="media/ig/DVV_ZGaDkl1.jpg" alt="" loading="lazy"><span class="tag">Moda</span><span class="name">Bari Venezuela</span></div>
+        <div><img class="cbg" src="media/ig/C-iH-cPRKnP.jpg" alt="" loading="lazy"><span class="tag">Eventos</span><span class="name">Juventud de Reforma</span></div>
+        <div><img class="cbg" src="media/ig/DSidLO1kdBN.jpg" alt="" loading="lazy"><span class="tag">Productora</span><span class="name">Vibra Visual</span></div>
+        <div><img class="cbg" src="media/ig/DNql9biN0j3.jpg" alt="" loading="lazy"><span class="tag">Floristería</span><span class="name">Blum Studio Floral</span></div>
+        <div><img class="cbg" src="media/ig/Dd7Pvruui9f.jpg" alt="" loading="lazy"><span class="tag">Barbería</span><span class="name">Alex Michael</span></div>
+        <div><img class="cbg" src="media/ig/De2KPo2JHyB.jpg" alt="" loading="lazy"><span class="tag">Lifestyle</span><span class="name">Evan Cabral</span></div>
+        <div><img class="cbg" src="media/ig/DfC8GwtpOy1.jpg" alt="" loading="lazy"><span class="tag">Deporte</span><span class="name">Ángel Sosa · Hyrox</span></div>
+        <div><img class="cbg" src="media/ig/DXamxHTkW_b.jpg" alt="" loading="lazy"><span class="tag">Barbería</span><span class="name">Efrata Barber</span></div>
+        <a class="you" href="https://wa.me/584243225597" target="_blank" rel="noopener"><span class="tag">Tu marca aquí</span><span class="name">¿La próxima?<small>Escríbeme ↗</small></span></a>
       </div>
     </div>
   </section>
@@ -551,7 +560,7 @@ details p { color: var(--muted); padding-bottom: 18px; max-width: 60ch; }
         <div class="stat"><svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M4 24s7-12 20-12 20 12 20 12-7 12-20 12S4 24 4 24z"/><circle pathLength="1" cx="24" cy="24" r="6"/></svg><strong><span data-count="276">276</span><sup>mil</sup></strong><h3>Vistas en un reel</h3><p>“Me pagaron 800$ por una edición”, mi video más visto. Para clientes: Alex Michael 125 mil y Utopia Fest 104,9 mil.</p></div>
         <div class="stat"><svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><rect pathLength="1" x="6" y="6" width="15" height="15" rx="2"/><rect pathLength="1" x="27" y="6" width="15" height="15" rx="2"/><rect pathLength="1" x="6" y="27" width="15" height="15" rx="2"/><rect pathLength="1" x="27" y="27" width="15" height="15" rx="2"/></svg><strong><span data-count="425">425</span><sup>+</sup></strong><h3>Publicaciones</h3><p>Piezas grabadas y editadas en mi cuenta.</p></div>
         <div class="stat"><svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><circle pathLength="1" cx="18" cy="17" r="7"/><path pathLength="1" d="M5 40c1-8 6-12 13-12s12 4 13 12M32 11a7 7 0 0 1 0 13M36 29c4 2 7 6 7 11"/></svg><strong><span data-count="7.4" data-dec="1">7,4</span><sup>mil</sup></strong><h3>Seguidores</h3><p>Una comunidad que sigue mi trabajo en Instagram.</p></div>
-        <div class="stat"><svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M24 5l5.6 11.6 12.7 1.7-9.3 8.8 2.3 12.6L24 33.6l-11.3 6.1 2.3-12.6-9.3-8.8 12.7-1.7z"/></svg><strong><span data-count="18">18</span><sup>+</sup></strong><h3>Marcas</h3><p>Festivales, centros comerciales, moda, comida, bodas, deporte y barbería.</p></div>
+        <div class="stat"><svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M24 5l5.6 11.6 12.7 1.7-9.3 8.8 2.3 12.6L24 33.6l-11.3 6.1 2.3-12.6-9.3-8.8 12.7-1.7z"/></svg><strong><span data-count="17">17</span><sup>+</sup></strong><h3>Marcas</h3><p>Festivales, centros comerciales, moda, comida, bodas, deporte y barbería.</p></div>
       </div>
     </div>
   </section>
@@ -564,7 +573,6 @@ details p { color: var(--muted); padding-bottom: 18px; max-width: 60ch; }
       <div class="quotes">
         <figure class="quote" style="margin:0"><p>“Si quieren videos así de increíbles, contraten a este duro.”</p><footer><b>La Casita Maracay</b><span>Ruta del perro caliente, 2024</span></footer></figure>
         <figure class="quote" style="margin:0"><p>“La meta en esta producción fue crear una estética elegante y sobria que hiciera resaltar los colores de las flores.”</p><footer><b>Juli, community manager</b><span>Blum Studio Floral · cámara y edición, 2025</span></footer></figure>
-        <figure class="quote pend" style="margin:0"><p>Espacio para el testimonio de un cliente. Pídele a Alex o a Evan una frase sobre trabajar contigo.</p><footer><b>Pendiente</b><span>Testimonio por conseguir</span></footer></figure>
       </div>
     </div>
   </section>
@@ -640,20 +648,19 @@ details p { color: var(--muted); padding-bottom: 18px; max-width: 60ch; }
 const ig = id => `media/ig/${id}`;
 const work = [
   { t: "Utopia Fest Tour · Nashville", c: "Utopia Movement", y: 2026, tags: ["Festival", "Edición"], k: ["cliente", "edit"], v: "104,9 mil", u: "https://www.instagram.com/reel/DWJzsOQkauw/", file: "UTOPIA_FEST.MP4", img: ig("DWJzsOQkauw.jpg"), video: ig("DWJzsOQkauw.mp4") },
-  { t: "3 años de Unicentro", c: "Unicentro Maracay", y: 2025, tags: ["Aniversario", "Grabación + edición"], k: ["cliente", "film", "edit"], v: "43,7 mil", u: "https://www.instagram.com/reel/DSlgRnWj0sS/", file: "UNICENTRO_3Y.MP4", img: ig("DSlgRnWj0sS.jpg"), video: "media/web/DSlgRnWj0sS_15s.mp4" },
+  { t: "Video resumen: Navidad en Unicentro", c: "Unicentro Maracay", y: 2025, tags: ["Navidad", "Grabación + edición"], k: ["cliente", "film", "edit"], v: "43,7 mil", u: "https://www.instagram.com/reel/DSlgRnWj0sS/", file: "UNICENTRO_NAVIDAD.MP4", img: ig("DSlgRnWj0sS.jpg"), video: "media/web/DSlgRnWj0sS_15s.mp4" },
   { t: "Intelligent Sound en FIPEV", c: "Intelligent Sound", y: 2025, tags: ["Feria", "Edición"], k: ["cliente", "edit"], v: "32,1 mil", u: "https://www.instagram.com/reel/DRsftwhiBby/", file: "FIPEV_CCLIDER.MP4", img: ig("DRsftwhiBby.jpg"), video: "media/web/DRsftwhiBby_15s.mp4", wide: true },
   { t: "San Valentín", c: "La Felicittà", y: 2024, tags: ["Gastronomía", "Edición"], k: ["cliente", "edit"], v: "16,1 mil", u: "https://www.instagram.com/reel/C3YR5EiPv2N/", file: "FELICITTA_SV.MP4", img: ig("C3YR5EiPv2N.jpg"), video: ig("C3YR5EiPv2N.mp4") },
-  { t: "Mundial", c: "Bebidas Crystal", y: 2026, tags: ["Comercial", "Grabación + edición"], k: ["cliente", "film", "edit"], v: "3,9 mil", u: "https://www.instagram.com/reel/DZdquHzhHpu/", file: "CRYSTAL_MUNDIAL.MP4", img: ig("DZdquHzhHpu.jpg"), video: ig("DZdquHzhHpu.mp4") },
-  { t: "Boda en el jardín", c: "Evolution Eventos", y: 2025, tags: ["Boda", "Edición 16:9"], k: ["cliente", "edit"], v: "11 mil", u: "https://www.instagram.com/reel/DSfnGsBjbPA/", file: "EVOLUTION_BODA.MP4", img: ig("DSfnGsBjbPA.jpg"), video: "media/web/DSfnGsBjbPA_15s.mp4", wide: true },
+  { t: "Mundial con Bebidas Crystal", c: "Bebidas Crystal", y: 2026, tags: ["Comercial", "Grabación + edición"], k: ["cliente", "film", "edit"], v: "3,9 mil", u: "https://www.instagram.com/reel/DZdquHzhHpu/", file: "CRYSTAL_MUNDIAL.MP4", img: ig("DZdquHzhHpu.jpg"), video: ig("DZdquHzhHpu.mp4") },
+  { t: "Boda de Tati y Tate", c: "Evolution Eventos", y: 2025, tags: ["Boda", "Edición 16:9"], k: ["cliente", "edit"], v: "11 mil", u: "https://www.instagram.com/reel/DSfnGsBjbPA/", file: "BODA_TATI_TATE.MP4", img: ig("DSfnGsBjbPA.jpg"), video: "media/web/DSfnGsBjbPA_15s.mp4", wide: true },
   { t: "This is Blūm", c: "Blum Studio Floral", y: 2025, tags: ["Lanzamiento", "Edición"], k: ["cliente", "edit"], v: "5,7 mil", u: "https://www.instagram.com/reel/DNql9biN0j3/", file: "BLUM_LAUNCH.MP4", img: ig("DNql9biN0j3.jpg"), video: ig("DNql9biN0j3.mp4") },
-  { t: "Sunland Park", c: "Viva 915 Media", y: 2025, tags: ["Evento", "Edición"], k: ["cliente", "edit"], v: "3,1 mil", u: "https://www.instagram.com/reel/DL2mf4mRDIk/", file: "VIVA915_SUNLAND.MP4", img: ig("DL2mf4mRDIk.jpg"), video: "media/web/DL2mf4mRDIk_15s.mp4" },
+  { t: "Video recap Viva 915 Media", c: "Viva 915 Media", y: 2025, tags: ["Evento", "Edición"], k: ["cliente", "edit"], v: "3,1 mil", u: "https://www.instagram.com/reel/DL2mf4mRDIk/", file: "VIVA915_RECAP.MP4", img: ig("DL2mf4mRDIk.jpg"), video: "media/web/DL2mf4mRDIk_15s.mp4" },
   { t: "Me pagaron 800$ por una edición", c: "Jomi Vivas", y: 2024, tags: ["Storytelling", "Edición"], k: ["edit"], v: "276 mil", u: "https://www.instagram.com/jomi_vivas/reel/C_g00Z5P-Ry/", file: "800_EDIT.MP4", img: ig("C_g00Z5P-Ry.jpg"), video: "media/web/C_g00Z5P-Ry_15s.mp4" },
   { t: "Carpe Diem", c: "Mr. Brands", y: 2024, tags: ["Moda", "Comercial"], k: ["cliente", "film", "edit"], v: "35,5 mil", u: "https://www.instagram.com/mrbrandsve/reel/C8poMOkv7gP/", file: "MRBRANDS_A001.MOV", img: ig("C8poMOkv7gP.jpg"), video: ig("C8poMOkv7gP.mp4") },
   { t: "Hyrox", c: "Ángel Sosa", y: 2026, tags: ["Deporte", "Cinematic"], k: ["cliente", "film", "edit"], v: "Reel", u: "https://www.instagram.com/angelsosagz/reel/DfC8GwtpOy1/", file: "HYROX_RECAP.MP4", img: ig("DfC8GwtpOy1.jpg"), video: ig("DfC8GwtpOy1.mp4") },
   { t: "Ruta del perro caliente", c: "La Casita Maracay", y: 2024, tags: ["Gastronomía", "Redes"], k: ["cliente", "film", "edit"], v: "14,4 mil", u: "https://www.instagram.com/lacasitamaracay/reel/C6WQrEfLkJB/", file: "LACASITA_D3.MOV", img: ig("C6WQrEfLkJB.jpg"), video: ig("C6WQrEfLkJB.mp4") },
   { t: "Concreto de Maracay", c: "Bari Venezuela", y: 2026, tags: ["Moda", "Brand film"], k: ["cliente", "film", "edit"], v: "16,3 mil", u: "https://www.instagram.com/barivzla___/reel/DVV_ZGaDkl1/", file: "BARI_TRIBUTO.MP4", img: ig("DVV_ZGaDkl1.jpg"), video: "media/web/DVV_ZGaDkl1_15s.mp4" },
   { t: "Reforma Camp", c: "Juventud de Reforma", y: 2024, tags: ["Evento", "Recap"], k: ["cliente", "film", "edit"], v: "14,5 mil", u: "https://www.instagram.com/juventuddereforma/reel/C-iH-cPRKnP/", file: "CAMP_DIA1.MP4", img: ig("C-iH-cPRKnP.jpg"), video: "media/web/C-iH-cPRKnP_15s.mp4" },
-  { t: "Fotos con una Sony compacta", c: "Alex Alvarado", y: 2024, tags: ["Fotografía", "Retrato"], k: ["cliente", "foto"], v: "33,1 mil", u: "https://www.instagram.com/dobletey/reel/C5MkAORLtUP/", file: "SONY_COMPACT.MP4", img: ig("C5MkAORLtUP.jpg"), video: ig("C5MkAORLtUP.mp4") },
   { t: "Blum Studio Floral", c: "Vibra Visual", y: 2025, tags: ["Producto", "Cámara + edición"], k: ["cliente", "film", "edit"], v: "BTS", u: "https://www.instagram.com/julipaovf/reel/DSidLO1kdBN/", file: "BLUM_PAUTA.MOV", img: ig("DSidLO1kdBN.jpg"), video: ig("DSidLO1kdBN.mp4") },
   { t: "The important shape", c: "Alex Michael", y: 2026, tags: ["Barbería", "Edición + color"], k: ["cliente", "edit"], v: "125 mil", u: "https://www.instagram.com/reel/Dd7Pvruui9f/", file: "ALEX_SHAPE.MP4", img: ig("Dd7Pvruui9f.jpg"), video: ig("Dd7Pvruui9f.mp4") },
   { t: "Graduation is what we do everyday", c: "Alex Michael", y: 2026, tags: ["Barbería", "Talking head"], k: ["cliente", "edit"], v: "24 mil", u: "https://www.instagram.com/reel/DeZn0JTB3gS/", file: "ALEX_GRADUATION.MP4", img: ig("DeZn0JTB3gS.jpg"), video: ig("DeZn0JTB3gS.mp4") },
@@ -759,12 +766,12 @@ const REEL_SEG = 2.4;
 const REEL = [
   ["UTOPIA_FEST.MP4", "Utopia Fest Tour", "Utopia Movement"], ["HYROX_RECAP.MP4", "Hyrox", "Ángel Sosa"],
   ["MRBRANDS_A001.MOV", "Carpe Diem", "Mr. Brands"], ["ECABS_RR.MP4", "Rolls-Royce", "Evan Cabral"],
-  ["UNICENTRO_3Y.MP4", "3 años de Unicentro", "Unicentro Maracay"], ["BARI_TRIBUTO.MP4", "Concreto de Maracay", "Bari Venezuela"],
-  ["EVOLUTION_BODA.MP4", "Boda en el jardín", "Evolution Eventos"], ["FIPEV_CCLIDER.MP4", "Intelligent Sound en FIPEV", "Intelligent Sound"],
-  ["ALEX_SHAPE.MP4", "The important shape", "Alex Michael"], ["CRYSTAL_MUNDIAL.MP4", "Mundial", "Bebidas Crystal"],
+  ["UNICENTRO_NAVIDAD.MP4", "Navidad en Unicentro", "Unicentro Maracay"], ["BARI_TRIBUTO.MP4", "Concreto de Maracay", "Bari Venezuela"],
+  ["BODA_TATI_TATE.MP4", "Boda de Tati y Tate", "Evolution Eventos"], ["FIPEV_CCLIDER.MP4", "Intelligent Sound en FIPEV", "Intelligent Sound"],
+  ["ALEX_SHAPE.MP4", "The important shape", "Alex Michael"], ["CRYSTAL_MUNDIAL.MP4", "Mundial con Bebidas Crystal", "Bebidas Crystal"],
   ["ECABS_DUNAS.MP4", "Dunas", "Evan Cabral"], ["BLUM_LAUNCH.MP4", "This is Blūm", "Blum Studio Floral"],
   ["FELICITTA_SV.MP4", "San Valentín", "La Felicittà"], ["CAMP_DIA1.MP4", "Reforma Camp", "Juventud de Reforma"],
-  ["VIVA915_SUNLAND.MP4", "Sunland Park", "Viva 915 Media"],
+  ["VIVA915_RECAP.MP4", "Video recap Viva 915 Media", "Viva 915 Media"],
 ];
 const reel = document.getElementById("reel");
 const $ = id => document.getElementById(id);
