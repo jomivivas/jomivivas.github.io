@@ -98,7 +98,17 @@ main, footer { position: relative; z-index: 1; }
 /* hero */
 .hero { position: relative; min-height: 92svh; display: grid; align-content: end; padding-block: 120px 0; overflow: hidden; }
 .hero .bg { position: absolute; inset: 0; }
-.hero .bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,10,10,.45) 0%, rgba(10,10,10,.2) 40%, rgba(10,10,10,.92) 100%); }
+.hero .bg::after { content: ""; position: absolute; inset: 0; background:
+  radial-gradient(ellipse 75% 45% at 28% 62%, rgba(10,10,10,.62), transparent 70%),
+  linear-gradient(180deg, rgba(10,10,10,.55) 0%, rgba(10,10,10,.38) 38%, rgba(10,10,10,.7) 62%, rgba(10,10,10,.95) 100%); }
+/* video de portada: más tenue en pausa / cargando; al reproducirse sube un poco y se funde con el título */
+.hero #reel { opacity: .5; filter: saturate(.85) brightness(.9); transition: opacity 1.2s ease, filter 1.2s ease; }
+.hero.is-playing #reel { opacity: .78; filter: saturate(1) brightness(.95); }
+.hero h1 { position: relative; text-shadow: 0 2px 28px rgba(0,0,0,.55), 0 0 2px rgba(0,0,0,.35); }
+/* eco del título: contorno desplazado que se mezcla con el color del video (fusión) */
+.hero h1::after { content: attr(data-text); position: absolute; inset: 0; z-index: -1; color: transparent; -webkit-text-stroke: 1.5px rgba(255,255,255,.38); mix-blend-mode: overlay; transform: translate(.06em, .06em); opacity: 0; transition: opacity 1.2s ease; pointer-events: none; text-shadow: none; }
+.hero.is-playing h1::after { opacity: 1; animation: echo 6s ease-in-out infinite alternate; }
+@keyframes echo { from { transform: translate(.05em, .05em); } to { transform: translate(-.04em, .08em); } }
 .hero .bg .who { position: absolute; z-index: 1; right: max(20px, calc((100% - var(--max)) / 2 + 20px)); top: 110px; width: min(24vw, 320px); aspect-ratio: 4 / 5; margin: 0; border: 1px solid rgba(255,255,255,.18); padding: 6px; background: rgba(10,10,10,.5); }
 .hero .bg .who img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(.15) contrast(1.05); }
 .hero .bg .who figcaption { position: absolute; left: 6px; bottom: -22px; }
@@ -507,7 +517,7 @@ details p { color: var(--muted); padding-bottom: 18px; max-width: 60ch; }
       <div class="hero-in">
         <div class="copy">
           <button class="reel-link" id="reelBtn" type="button"><span class="play-ring" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span> Ver showreel 2026</button>
-          <h1 class="split">Videos que nadie quiere saltar</h1>
+          <h1 class="split" data-text="Videos que nadie quiere saltar">Videos que nadie quiere saltar</h1>
         </div>
       </div>
       <div class="hero-row">
@@ -875,6 +885,12 @@ const REEL = [
   ["VIVA915_RECAP.MP4", "Video recap Viva 915 Media", "Viva 915 Media"],
 ];
 const reel = document.getElementById("reel");
+// La portada sabe si el video corre: en pausa/cargando queda tenue; corriendo, se funde con el título.
+const heroEl = document.querySelector(".hero");
+const setPlaying = on => heroEl.classList.toggle("is-playing", on);
+reel.addEventListener("playing", () => setPlaying(true));
+["pause", "waiting", "stalled", "emptied"].forEach(ev => reel.addEventListener(ev, () => setPlaying(false)));
+if (!reel.paused && reel.readyState > 2) setPlaying(true);
 const $ = id => document.getElementById(id);
 $("reelTot").textContent = String(REEL.length).padStart(2, "0");
 let reelIdx = -1;
